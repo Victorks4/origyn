@@ -146,7 +146,7 @@ export function SiteHeader() {
 
             <Link
               href="/"
-              className="font-serif text-xl font-semibold tracking-tight text-white md:flex-1 md:text-center md:text-2xl"
+              className="font-logo text-xl font-semibold tracking-[-0.03em] text-white lowercase md:flex-1 md:text-center md:text-2xl"
             >
               Origyn
             </Link>

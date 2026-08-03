@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { Check } from "lucide-react"
 import { useGSAP } from "@gsap/react"
 import { registerGsap, gsap, ScrollTrigger } from "@/lib/gsap/register"
+import { waitForLoaderComplete } from "@/lib/loader-events"
 
 const stats = [
   { title: "Feito para durar", subtitle: "Peças atemporais" },
@@ -34,38 +35,42 @@ export function Hero() {
         return
       }
 
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: 0.8,
-        onUpdate: (self) => {
-          gsap.set(videoWrap, {
-            scale: 1 + self.progress * 0.06,
-            y: self.progress * 30,
-          })
-        },
-      })
+      const startHeroMotion = () => {
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.8,
+          onUpdate: (self) => {
+            gsap.set(videoWrap, {
+              scale: 1 + self.progress * 0.06,
+              y: self.progress * 30,
+            })
+          },
+        })
 
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } })
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } })
 
-      tl.from(".hero-badge", { y: 24, autoAlpha: 0, duration: 0.7, delay: 0.2 })
-        .from(
-          ".hero-headline",
-          { y: 32, autoAlpha: 0, duration: 0.9 },
-          "-=0.4"
-        )
-        .from(".hero-desc", { y: 20, autoAlpha: 0, duration: 0.7 }, "-=0.5")
-        .from(
-          ".hero-cta",
-          { y: 16, autoAlpha: 0, scale: 0.95, duration: 0.6, stagger: 0.1 },
-          "-=0.4"
-        )
-        .from(
-          ".hero-stat",
-          { y: 20, autoAlpha: 0, duration: 0.6, stagger: 0.1 },
-          "-=0.3"
-        )
+        tl.from(".hero-badge", { y: 24, autoAlpha: 0, duration: 0.7, delay: 0.2 })
+          .from(
+            ".hero-headline",
+            { y: 32, autoAlpha: 0, duration: 0.9 },
+            "-=0.4"
+          )
+          .from(".hero-desc", { y: 20, autoAlpha: 0, duration: 0.7 }, "-=0.5")
+          .from(
+            ".hero-cta",
+            { y: 16, autoAlpha: 0, scale: 0.95, duration: 0.6, stagger: 0.1 },
+            "-=0.4"
+          )
+          .from(
+            ".hero-stat",
+            { y: 20, autoAlpha: 0, duration: 0.6, stagger: 0.1 },
+            "-=0.3"
+          )
+      }
+
+      return waitForLoaderComplete(startHeroMotion)
     },
     { scope: sectionRef }
   )

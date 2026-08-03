@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Inter, Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google'
+import { PageLoader } from '@/components/motion/page-loader'
 import { SmoothScroll } from '@/components/motion/smooth-scroll'
 import './globals.css'
 
@@ -13,6 +14,13 @@ const inter = Inter({
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
+  display: 'swap',
+})
+
+const logoFont = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-plus-jakarta',
+  weight: ['500', '600', '700'],
   display: 'swap',
 })
 
@@ -53,9 +61,10 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`dark bg-background ${inter.variable} ${playfair.variable}`}
+      className={`dark bg-background ${inter.variable} ${playfair.variable} ${logoFont.variable}`}
     >
       <body className="font-sans antialiased">
+        <PageLoader />
         <SmoothScroll>{children}</SmoothScroll>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
