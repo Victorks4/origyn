@@ -93,9 +93,8 @@ export function Hero() {
           preload="auto"
           poster="/hero-poster.webp"
           aria-hidden="true"
-          fetchPriority="high"
         >
-          <source src="/hero.webm" type="video/webm" />
+          <source src="/hero.webm" type='video/webm; codecs="av01.0.08M.08"' />
           <source src="/hero.mp4" type="video/mp4" />
         </video>
       </div>
