@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { OrigynLogo } from "@/components/origyn-logo"
 
 const footerLinks = [
   { label: "Coleção", href: "#colecao" },
@@ -13,15 +14,12 @@ export function SiteFooter() {
     <footer className="border-t border-border bg-background py-12 lg:py-16">
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 lg:flex-row lg:items-end lg:justify-between lg:px-10">
         <div>
-          <Link
-            href="/"
-            className="font-serif text-2xl font-semibold tracking-tight text-foreground"
-          >
-            Origyn
+          <Link href="/" className="text-foreground">
+            <OrigynLogo />
           </Link>
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-            Moda autêntica para quem valoriza origem, qualidade e design
-            atemporal.
+            Moda feminina e unissex para quem valoriza origem, qualidade e
+            design atemporal.
           </p>
         </div>
 

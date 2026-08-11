@@ -53,9 +53,9 @@ export function AboutSection() {
             </h2>
             <p className="about-reveal mt-4 text-lg leading-relaxed text-muted-foreground">
               A Origyn nasceu da crença de que roupas podem ser mais do que
-              tendências — podem ser extensão de quem somos. Criamos peças
-              elegantes para homens e mulheres que valorizam autenticidade,
-              qualidade e design atemporal.
+              tendências: podem ser extensão de quem somos. Criamos peças
+              femininas e unissex para quem valoriza autenticidade, qualidade e
+              design atemporal.
             </p>
             <p className="about-reveal mt-4 text-lg leading-relaxed text-muted-foreground">
               Cada coleção é uma narrativa visual, pensada para inspirar
@@ -63,12 +63,13 @@ export function AboutSection() {
             </p>
           </div>
 
-          <div className="about-image aspect-square overflow-hidden rounded-2xl bg-muted">
+          <div className="about-image group relative aspect-[4/5] overflow-hidden rounded-2xl border border-border bg-muted lg:aspect-square">
             <img
-              src="/placeholder-user.jpg"
-              alt="Equipe Origyn"
-              className="h-full w-full object-cover"
+              src="/about/atelier.jpg"
+              alt="Editorial Origyn, moda feminina atemporal"
+              className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 group-hover:scale-105"
             />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent" />
           </div>
         </div>
       </div>

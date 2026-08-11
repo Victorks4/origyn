@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { gsap, registerGsap } from "@/lib/gsap/register"
 import { markLoaderComplete } from "@/lib/loader-events"
+import { OrigynLogo } from "@/components/origyn-logo"
 
 const PHRASES = [
   "Vestindo histórias, não tendências.",
@@ -154,9 +155,7 @@ export function PageLoader() {
       aria-hidden="true"
     >
       <div className="flex flex-1 flex-col items-center justify-center px-8 text-center">
-        <p className="font-serif text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-          Origyn
-        </p>
+        <OrigynLogo className="scale-125 text-white sm:scale-150" />
         <p
           ref={phraseRef}
           className="mt-5 max-w-sm text-sm leading-relaxed text-white/55 sm:text-base"

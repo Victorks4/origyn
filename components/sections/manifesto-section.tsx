@@ -40,7 +40,7 @@ export function ManifestoSection() {
           &ldquo;Roupas não são tendência. São extensão de quem você é.&rdquo;
         </blockquote>
         <p className="mt-8 text-lg text-muted-foreground">
-          Na Origyn, cada coleção nasce de uma narrativa — não de um algoritmo.
+          Na Origyn, cada coleção nasce de uma narrativa, não de um algoritmo.
         </p>
       </div>
     </section>

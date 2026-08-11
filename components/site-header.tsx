@@ -6,6 +6,7 @@ import { LayoutGrid } from "lucide-react"
 import { gsap, registerGsap } from "@/lib/gsap/register"
 import { useLenis } from "@/lib/lenis-context"
 import { MobileMenu } from "@/components/mobile-menu"
+import { OrigynLogo } from "@/components/origyn-logo"
 
 const navLinks = [
   { label: "Coleção", href: "#colecao" },
@@ -50,6 +51,9 @@ export function SiteHeader() {
 
     gsap.set(wrapper, { paddingTop: topPad })
 
+    const navBackdrop = blur > 0 ? `blur(${blur}px)` : "none"
+    const gridBackdrop = blur > 0 ? `blur(${blur}px)` : "blur(6px)"
+
     gsap.set(nav, {
       width,
       flex: "0 0 auto",
@@ -66,13 +70,13 @@ export function SiteHeader() {
         bgAlpha > 0.02
           ? `oklch(0.18 0.01 60 / ${bgAlpha})`
           : "transparent",
-      backdropFilter: blur > 0 ? `blur(${blur}px)` : "none",
-      WebkitBackdropFilter: blur > 0 ? `blur(${blur}px)` : "none",
+      backdropFilter: navBackdrop,
       boxShadow:
         shadowAlpha > 0.02
           ? `0 12px 40px rgba(0,0,0,${shadowAlpha})`
           : "none",
     })
+    nav.style.webkitBackdropFilter = navBackdrop
 
     gsap.set(grid, {
       scale,
@@ -84,13 +88,13 @@ export function SiteHeader() {
         bgAlpha > 0.02
           ? `oklch(0.18 0.01 60 / ${bgAlpha})`
           : "rgba(255,255,255,0.06)",
-      backdropFilter: blur > 0 ? `blur(${blur}px)` : "blur(6px)",
-      WebkitBackdropFilter: blur > 0 ? `blur(${blur}px)` : "blur(6px)",
+      backdropFilter: gridBackdrop,
       boxShadow:
         shadowAlpha > 0.02
           ? `0 12px 40px rgba(0,0,0,${shadowAlpha})`
           : "none",
     })
+    grid.style.webkitBackdropFilter = gridBackdrop
   }, [])
 
   useEffect(() => {
@@ -146,9 +150,9 @@ export function SiteHeader() {
 
             <Link
               href="/"
-              className="font-logo text-xl font-semibold tracking-[-0.03em] text-white lowercase md:flex-1 md:text-center md:text-2xl"
+              className="text-white md:flex-1 md:flex md:justify-center"
             >
-              Origyn
+              <OrigynLogo />
             </Link>
 
             <div className="flex items-center justify-end gap-3 md:flex-1">

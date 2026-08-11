@@ -85,7 +85,7 @@ export function Hero() {
         className="absolute inset-0 will-change-transform"
       >
         <video
-          className="h-full w-full object-cover object-center"
+          className="h-full w-full scale-[1.08] object-cover object-[center_42%]"
           autoPlay
           muted
           loop
@@ -102,11 +102,15 @@ export function Hero() {
 
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/20"
+        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-background/80 via-transparent to-background/20"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-transparent"
+        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-background/40 via-transparent to-transparent"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_bottom_right,rgba(20,18,16,0.95)_0%,rgba(20,18,16,0.55)_38%,transparent_68%)]"
       />
 
       <div className="relative z-10 mx-auto flex min-h-[100dvh] w-full max-w-7xl flex-col px-6 lg:px-12 xl:px-16">
@@ -124,8 +128,9 @@ export function Hero() {
             </h1>
 
             <p className="hero-desc mt-5 max-w-md text-pretty text-lg leading-relaxed text-white/75">
-              A Origyn traduz quem você é em roupas que atravessam o tempo.
-              Descubra peças autênticas, pensadas para acompanhar a sua história.
+              A Origyn traduz quem você é em peças femininas e unissex que
+              atravessam o tempo. Descubra roupas autênticas, pensadas para
+              acompanhar a sua história.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">

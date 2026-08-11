@@ -8,18 +8,22 @@ const materials = [
   {
     name: "Algodão orgânico",
     description: "Fibra cultivada sem agrotóxicos, toque macio e durável.",
+    image: "/materials/algodao.jpg",
   },
   {
     name: "Lã merino",
     description: "Termorregulação natural para peças de inverno elegantes.",
+    image: "/materials/la.jpg",
   },
   {
     name: "Linho europeu",
     description: "Respirável e atemporal, perfeito para o clima brasileiro.",
+    image: "/materials/linho.jpg",
   },
   {
     name: "Couro vegetal",
     description: "Alternativa sustentável com acabamento premium.",
+    image: "/materials/couro-vegetal.jpg",
   },
 ]
 
@@ -69,13 +73,21 @@ export function MaterialsSection() {
           {materials.map((material) => (
             <article
               key={material.name}
-              className="material-card rounded-2xl border border-border bg-background p-6 transition-colors hover:border-foreground/20"
+              className="material-card overflow-hidden rounded-2xl border border-border bg-background transition-colors hover:border-foreground/20"
             >
-              <div className="mb-4 h-px w-8 bg-primary" />
-              <h3 className="font-medium text-foreground">{material.name}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {material.description}
-              </p>
+              <div className="aspect-square overflow-hidden bg-muted">
+                <img
+                  src={material.image}
+                  alt={material.name}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="font-medium text-foreground">{material.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {material.description}
+                </p>
+              </div>
             </article>
           ))}
         </div>

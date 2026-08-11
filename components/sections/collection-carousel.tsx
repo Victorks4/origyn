@@ -1,10 +1,12 @@
 "use client"
 
-import { useRef, useState, useCallback } from "react"
+import { useRef, useState, useCallback, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useGSAP } from "@gsap/react"
 import { registerGsap, gsap } from "@/lib/gsap/register"
 import { products } from "@/lib/products"
+
+const AUTOPLAY_INTERVAL_MS = 2000
 
 export function CollectionCarousel() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -14,9 +16,23 @@ export function CollectionCarousel() {
   const scroll = useCallback((direction: "left" | "right") => {
     const track = trackRef.current
     if (!track) return
+
     const cardWidth = track.querySelector("article")?.clientWidth ?? 300
+    const step = cardWidth + 24
+    const max = track.scrollWidth - track.clientWidth
+
+    if (direction === "right" && track.scrollLeft >= max - 2) {
+      track.scrollTo({ left: 0, behavior: "smooth" })
+      return
+    }
+
+    if (direction === "left" && track.scrollLeft <= 2) {
+      track.scrollTo({ left: max, behavior: "smooth" })
+      return
+    }
+
     track.scrollBy({
-      left: direction === "left" ? -cardWidth - 24 : cardWidth + 24,
+      left: direction === "left" ? -step : step,
       behavior: "smooth",
     })
   }, [])
@@ -27,6 +43,41 @@ export function CollectionCarousel() {
     const max = track.scrollWidth - track.clientWidth
     setProgress(max > 0 ? track.scrollLeft / max : 0)
   }, [])
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+    if (prefersReducedMotion) return
+
+    const track = trackRef.current
+    if (!track) return
+
+    let paused = false
+    const pause = () => {
+      paused = true
+    }
+    const resume = () => {
+      paused = false
+    }
+
+    track.addEventListener("mouseenter", pause)
+    track.addEventListener("mouseleave", resume)
+    track.addEventListener("focusin", pause)
+    track.addEventListener("focusout", resume)
+
+    const intervalId = window.setInterval(() => {
+      if (!paused) scroll("right")
+    }, AUTOPLAY_INTERVAL_MS)
+
+    return () => {
+      window.clearInterval(intervalId)
+      track.removeEventListener("mouseenter", pause)
+      track.removeEventListener("mouseleave", resume)
+      track.removeEventListener("focusin", pause)
+      track.removeEventListener("focusout", resume)
+    }
+  }, [scroll])
 
   useGSAP(
     () => {
@@ -75,7 +126,7 @@ export function CollectionCarousel() {
               Peças que contam histórias
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Cada peça é pensada para expressar autenticidade — do corte ao
+              Cada peça é pensada para expressar autenticidade, do corte ao
               acabamento, sem comprometer elegância.
             </p>
           </div>

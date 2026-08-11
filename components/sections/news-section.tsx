@@ -15,11 +15,12 @@ export function NewsSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 75%",
+          once: true,
         },
-        scale: 1.08,
-        opacity: 0,
+        y: 32,
         duration: 1.2,
         ease: "power3.out",
+        clearProps: "transform",
       })
 
       gsap.from(".news-content > *", {
@@ -45,11 +46,11 @@ export function NewsSection() {
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="news-image aspect-[4/3] overflow-hidden rounded-2xl bg-muted">
+          <div className="news-image aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-muted">
             <img
-              src="/placeholder.jpg"
-              alt="Editorial da nova coleção Origyn"
-              className="h-full w-full object-cover"
+              src="/editorial/novidades.jpg"
+              alt="Nova coleção de inverno Origyn"
+              className="h-full w-full object-cover object-center"
             />
           </div>
 

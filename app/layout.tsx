@@ -25,19 +25,15 @@ const logoFont = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Origyn — Seu estilo, sua origem',
+  title: 'Origyn | Seu estilo, sua origem',
   description:
-    'Origyn é uma marca de roupas que celebra a sua origem. Descubra peças atemporais que traduzem o seu estilo.',
+    'Origyn é uma marca de moda feminina e unissex que celebra a sua origem. Descubra peças atemporais que traduzem o seu estilo.',
   generator: 'v0.app',
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
+        url: '/logo-mark.svg',
+        type: 'image/svg+xml',
       },
       {
         url: '/icon.svg',

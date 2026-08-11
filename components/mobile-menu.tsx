@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { X } from "lucide-react"
+import { OrigynLogo } from "@/components/origyn-logo"
 
 const navLinks = [
   { label: "Coleção", href: "#colecao" },
@@ -43,9 +44,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
 
       <div className="absolute right-4 top-20 w-[calc(100%-2rem)] max-w-sm rounded-2xl border border-white/10 bg-zinc-900/95 p-6 shadow-2xl backdrop-blur-xl md:right-6 md:max-w-md">
         <div className="mb-6 flex items-center justify-between">
-          <span className="font-serif text-xl font-semibold text-foreground">
-            Origyn
-          </span>
+          <OrigynLogo className="text-foreground" />
           <button
             type="button"
             onClick={onClose}
