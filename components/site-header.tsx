@@ -36,10 +36,21 @@ export function SiteHeader() {
     const grid = gridRef.current
     if (!wrapper || !nav || !grid) return
 
-    const expandedWidth = Math.min(window.innerWidth - 80, 1280)
-    const compactWidth = Math.min(720, expandedWidth - 120)
+    const isMobile = window.innerWidth < 768
+    const gap = 12
+    const maxNavWidth = Math.max(
+      wrapper.clientWidth - grid.offsetWidth - gap,
+      0
+    )
 
-    const width = lerp(expandedWidth, compactWidth, p)
+    const expandedWidth = isMobile
+      ? maxNavWidth
+      : Math.min(maxNavWidth, 1280)
+    const compactWidth = isMobile
+      ? maxNavWidth
+      : Math.min(720, expandedWidth - 120)
+
+    const width = isMobile ? maxNavWidth : lerp(expandedWidth, compactWidth, p)
     const paddingX = lerp(28, 18, p)
     const bgAlpha = lerp(0, 0.9, p)
     const blur = lerp(0, 20, p)
@@ -55,8 +66,9 @@ export function SiteHeader() {
     const gridBackdrop = blur > 0 ? `blur(${blur}px)` : "blur(6px)"
 
     gsap.set(nav, {
-      width,
-      flex: "0 0 auto",
+      ...(isMobile
+        ? { width: "auto", flex: "1 1 auto", minWidth: 0 }
+        : { width, flex: "0 0 auto" }),
       paddingLeft: paddingX,
       paddingRight: paddingX,
       paddingTop: 12,
@@ -131,12 +143,12 @@ export function SiteHeader() {
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
         <div
           ref={wrapperRef}
-          className="mx-auto flex w-full max-w-[calc(100%-1.5rem)] items-center justify-center gap-3 px-3 sm:max-w-[calc(100%-2rem)] sm:px-4"
+          className="mx-auto flex w-full max-w-[calc(100%-1.5rem)] items-center justify-between gap-3 px-3 sm:max-w-[calc(100%-2rem)] sm:justify-center sm:px-4"
         >
           <nav
             ref={navRef}
             aria-label="Navegação principal"
-            className="pointer-events-auto flex min-w-0 shrink-0 items-center justify-between gap-4 will-change-[width,transform,background-color]"
+            className="pointer-events-auto flex min-w-0 flex-1 items-center justify-between gap-2 overflow-hidden will-change-[width,transform,background-color] sm:max-w-none sm:flex-none sm:gap-4"
           >
             <ul className="hidden items-center gap-6 md:flex md:flex-1">
               {navLinks.map((link) => (
@@ -150,18 +162,19 @@ export function SiteHeader() {
 
             <Link
               href="/"
-              className="text-white md:flex-1 md:flex md:justify-center"
+              className="min-w-0 shrink text-white md:flex-1 md:flex md:justify-center"
             >
-              <OrigynLogo />
+              <OrigynLogo variant="mark" className="md:hidden" />
+              <OrigynLogo className="hidden md:inline-flex" />
             </Link>
 
-            <div className="flex items-center justify-end gap-3 md:flex-1">
+            <div className="flex shrink-0 items-center justify-end gap-2 md:flex-1 md:gap-3">
               <Link href="#login" className="nav-link hidden sm:inline">
                 Entrar
               </Link>
               <Link
                 href="#loja"
-                className="rounded-full bg-white px-5 py-2.5 text-sm font-medium text-zinc-900 transition-opacity hover:opacity-90"
+                className="rounded-full bg-white px-3.5 py-2 text-xs font-medium whitespace-nowrap text-zinc-900 transition-opacity hover:opacity-90 sm:px-5 sm:py-2.5 sm:text-sm"
               >
                 Comprar
               </Link>
